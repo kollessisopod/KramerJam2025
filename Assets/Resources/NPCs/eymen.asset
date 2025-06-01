@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68fce6bc75b33164fb6812f37a92e90d, type: 3}
+  m_Name: eymen
+  m_EditorClassIdentifier: 
+  npcName: eymen
+  npcSprite: {fileID: 21300000, guid: 4745ef62640b2524686a55a5cc9149d2, type: 3}
+  npcPortrait: {fileID: 21300000, guid: 1200dd1ea34a6fb47b8929682ee530d8, type: 3}
+  dialogueLines:
+  - lines:
+    - film falan cok iyi
+  lastLine: bu ne

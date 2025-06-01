@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68fce6bc75b33164fb6812f37a92e90d, type: 3}
+  m_Name: deniz
+  m_EditorClassIdentifier: 
+  npcName: deniz
+  npcSprite: {fileID: 21300000, guid: 45e01a11c82bc454197310d0fe267846, type: 3}
+  npcPortrait: {fileID: 21300000, guid: 25f6eb6ffb5b52942b8cd8c8324e888a, type: 3}
+  dialogueLines:
+  - lines:
+    - bendeniz
+    - deniz
+  - lines: []
+  lastLine: taylor swiftr

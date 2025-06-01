@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68fce6bc75b33164fb6812f37a92e90d, type: 3}
+  m_Name: ugur
+  m_EditorClassIdentifier: 
+  npcName: ugur
+  npcSprite: {fileID: 21300000, guid: 07ba6fa5045175644a2e14d489b70c83, type: 3}
+  npcPortrait: {fileID: 21300000, guid: a946b1cf3b70260409d51b8bae053569, type: 3}
+  dialogueLines:
+  - lines:
+    - fallout
+  lastLine: asdasd
