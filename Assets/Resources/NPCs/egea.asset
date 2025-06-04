@@ -17,5 +17,9 @@ MonoBehaviour:
   npcPortrait: {fileID: 21300000, guid: 115ba3bf17c26ad42bc7dd78e6421b0b, type: 3}
   dialogueLines:
   - lines:
-    - egea line
-  lastLine: bu ney
+    - Wassup kanki
+    - Nakitim yok
+  - lines:
+    - Type shi
+    - fr
+  lastLine: omg

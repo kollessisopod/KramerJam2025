@@ -1,12 +1,13 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using TMPro;
 
 public class ItemsUI : MonoBehaviour
 {
 
     public Transform iconContainer; 
-
+    public TextMeshProUGUI jammerCountText; // Optional: Text to show the number of items
     public List<GameObject> currentIcons = new();
     public List<QuestItemComponent> questItems = new();
 
@@ -22,6 +23,8 @@ public class ItemsUI : MonoBehaviour
 
     public void UpdateUI()
     {
+        jammerCountText.text = "Jammer Sayısı : " + GameManagerScript.Instance.jammerCount.ToString();
+
         // Clear previous icons
         foreach (GameObject icon in currentIcons)
         {

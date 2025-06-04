@@ -17,9 +17,18 @@ MonoBehaviour:
   npcPortrait: {fileID: 21300000, guid: 515ac7b6766fd5c4ca6d94480d241382, type: 3}
   dialogueLines:
   - lines:
-    - 1
-    - 2
+    - "Mystopia'y\u0131 sat\u0131n al."
+    - '#isbirligi'
   - lines:
-    - 3
-    - 4
-  lastLine: bityis 5
+    - "\xC7ok iyi"
+  - lines:
+    - "Mystopiay\u0131 ald\u0131n m\u0131 \u015Fimdi"
+    - "Review atmay\u0131 unutma"
+  - lines:
+    - "O bug\u0131 \xE7\xF6z\xFCcem yak\u0131nda"
+    - Patch gelicek
+    - Hallederiz
+  - lines:
+    - Hell yeah
+    - Mystopia
+  lastLine: https://store.steampowered.com/app/3012780/Mystopia/

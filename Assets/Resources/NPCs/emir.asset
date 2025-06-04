@@ -17,5 +17,8 @@ MonoBehaviour:
   npcPortrait: {fileID: 21300000, guid: df40e97277fa2e14ea65d2239f8c2f82, type: 3}
   dialogueLines:
   - lines:
-    - mmmm
-  lastLine: microwave
+    - "Civilization V adamd\u0131r"
+  - lines:
+    - MMMMMM
+    - MMMMMM
+  lastLine: Mikrodalga

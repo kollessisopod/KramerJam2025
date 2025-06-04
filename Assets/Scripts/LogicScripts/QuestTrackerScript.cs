@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Unity.Properties;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class QuestTrackerScript : MonoBehaviour
 {
@@ -10,23 +11,34 @@ public class QuestTrackerScript : MonoBehaviour
     public JustDanceQuest justDanceQuest;
     public SleepQuest sleepQuest;
     public WallpaperQuest wallpaperQuest;
+    public NoodleQuest noodleQuest;
+    public Quest socialQuest;
     public List<QuestItemComponent> QuestItemComponents;
     public QuestItemComponent mtgBag;
     public QuestItemComponent redbull;
     public QuestItemComponent remote;
     public QuestItemComponent bed;
     public QuestItemComponent maliLaptop;
+    public QuestItemComponent noodle;
     private PlayerInteraction playerInteraction;
-    public List<Quest> Quests => new() { mtgQuest, pushUpQuest, justDanceQuest, sleepQuest, wallpaperQuest };
+    private PostQuestEffectsScript postQuestEffects;
+    private bool wonState = false;
+    public List<Quest> Quests => new() { mtgQuest, pushUpQuest, justDanceQuest, sleepQuest, wallpaperQuest, noodleQuest, socialQuest };
+    public Image nahWallpaper;
     void Start()
     {
         //Singleton
         mtgQuest = new MTGQuest(mtgBag, new List<string> { "kata", "omer", "eymen", "sadeali" });
         pushUpQuest = new PushUpQuest(redbull, new List<string> { "ugur", "kagan", "kata" });
         justDanceQuest = new JustDanceQuest(remote, new List<string> { "mali", "deniz" });
-        sleepQuest = new SleepQuest(bed, new List<string> { "egehan" });
-        wallpaperQuest = new WallpaperQuest(maliLaptop, new List<string> { "kagan" });
+        sleepQuest = new SleepQuest(bed, new List<string> { "egehan", "bugra" });
+        wallpaperQuest = new WallpaperQuest(maliLaptop, new List<string> { "kagan", "egea", "alren" });
+        noodleQuest = new NoodleQuest(noodle, new List<string> { "ege" });
+        socialQuest = new Quest { isActive = true, questDescription = "Tanımadığım insanlarla tanışabilirim." };
 
+        postQuestEffects = GameManagerScript.Instance.postQuestEffects;
+
+        wonState = GameManagerScript.Instance.wonState;
         playerInteraction = GameManagerScript.Instance.player.GetComponent<PlayerInteraction>();
     }
 
@@ -47,6 +59,8 @@ public class QuestTrackerScript : MonoBehaviour
                 mtgQuest.CompleteQuest();
                 Debug.Log("Quest completed: " + mtgQuest.questDescription);
                 GameManagerScript.Instance.player.GetComponent<PlayerInteraction>().Items.Remove(mtgBag);
+                
+                postQuestEffects.ProcessPostQuest(mtgQuest);
             }
         }
 
@@ -83,13 +97,103 @@ public class QuestTrackerScript : MonoBehaviour
                 justDanceQuest.CompleteQuest();
                 Debug.Log("Just Dance Quest completed: " + justDanceQuest.questDescription);
                 GameManagerScript.Instance.player.GetComponent<PlayerInteraction>().Items.Remove(remote);
+                postQuestEffects.ProcessPostQuest(justDanceQuest);
+
+            }
+        }
+
+        if (!sleepQuest.isActive)
+        {
+            if (bed.found)
+            {
+                sleepQuest.isActive = true;
+                Debug.Log("Sleep Quest is now active: " + sleepQuest.questDescription);
+            }
+        }
+        else if (!sleepQuest.isCompleted)
+        {
+            if (sleepQuest.egehanBool && sleepQuest.bugraBool)
+            {
+                sleepQuest.CompleteQuest();
+                Debug.Log("Sleep Quest completed: " + sleepQuest.questDescription);
+                GameManagerScript.Instance.player.GetComponent<PlayerInteraction>().Items.Remove(bed);
+                postQuestEffects.ProcessPostQuest(sleepQuest);
+
+            }
+        }
+
+
+        if (!wallpaperQuest.isActive)
+        {
+            if (maliLaptop.found)
+            {
+                wallpaperQuest.isActive = true;
+                Debug.Log("Wallpaper Quest is now active: " + wallpaperQuest.questDescription);
+            }
+        }
+        else if (!wallpaperQuest.isCompleted)
+        {
+            if (wallpaperQuest.kaganBool && wallpaperQuest.egeArdaBool && wallpaperQuest.alrenBool)
+            {
+                wallpaperQuest.CompleteQuest();
+                Debug.Log("Wallpaper Quest completed: " + wallpaperQuest.questDescription);
+                GameManagerScript.Instance.player.GetComponent<PlayerInteraction>().Items.Remove(maliLaptop);
+                postQuestEffects.ProcessPostQuest(wallpaperQuest);
+                GameManagerScript.Instance.cutscenePanel.GetComponent<CutsceneUI>().ShowCutscene(nahWallpaper, "Anlamlı");
+
+            }
+        }
+
+        if (!noodleQuest.isActive)
+        {
+            if (noodle.found)
+            {
+                noodleQuest.isActive = true;
+                Debug.Log("Noodle Quest is now active: " + noodleQuest.questDescription);
+            }
+        }
+        else if (!noodleQuest.isCompleted)
+        {
+            if (noodleQuest.egeBool)
+            {
+                noodleQuest.CompleteQuest();
+                Debug.Log("Noodle Quest completed: " + noodleQuest.questDescription);
+                GameManagerScript.Instance.player.GetComponent<PlayerInteraction>().Items.Remove(noodle);
+                postQuestEffects.ProcessPostQuest(noodleQuest);
+                playerInteraction.cutsceneIncoming = true;
+                playerInteraction.questKeyword = "noodle";
+
+
+            }
+        }
+
+        if(!socialQuest.isActive)
+        {
+            socialQuest.isActive = true;
+        } else if(!socialQuest.isCompleted)
+        {
+            if(GameManagerScript.Instance.talkedNpcCount >= GameManagerScript.Instance.allNpcs.Count)
+            {
+                socialQuest.CompleteQuest();
+                Debug.Log("Social Quest is completed: " + socialQuest.questDescription);
             }
         }
 
         // Win Condition
-        if (mtgQuest.isCompleted && pushUpQuest.isCompleted)
+        if (mtgQuest.isCompleted &&
+            pushUpQuest.isCompleted &&
+            justDanceQuest.isCompleted &&
+            sleepQuest.isCompleted &&
+            wallpaperQuest.isCompleted &&
+            noodleQuest.isCompleted && 
+            socialQuest.isCompleted && 
+            !wonState)
         {
             Debug.Log("All quests completed! You win the game!");
+            wonState = true;
+            GameManagerScript.Instance.wonState = true;
+            GameManagerScript.Instance.jammerCount--;
+            GameManagerScript.Instance.WinMeow();
         }
     }
 
@@ -103,13 +207,17 @@ public class QuestTrackerScript : MonoBehaviour
         bool hasBag = playerInteraction.Items.Contains(mtgBag);
         bool hasRedbull = playerInteraction.Items.Contains(redbull);
         bool hasRemote = playerInteraction.Items.Contains(remote);
+        bool hasBed = playerInteraction.Items.Contains(bed);
+        bool hasMaliLaptop = playerInteraction.Items.Contains(maliLaptop);
+        bool hasNoodle = playerInteraction.Items.Contains(noodle);
+
         if (npc.npcData.name == "kata" && hasBag)
         {
             if (!mtgQuest.kataBool)
             {
                 Debug.Log($"{npc.npcData.name}");
+                dialogueUI.ShowDialogue(npc.npcData, "TOPLA ÖMERİ SADEALİYİ EYMENİ MAGIC ATIYOZ");
                 mtgQuest.kataBool = true;
-                dialogueUI.ShowDialogue(npc.npcData, "TOPLA OMERI SADEALIYI EYMENI MAGIC ATIYOZ");
                 Debug.Log("Kata's quest interaction completed.");
                 return true;
             }
@@ -118,8 +226,8 @@ public class QuestTrackerScript : MonoBehaviour
         {
             if (!mtgQuest.omerBool)
             {
+                dialogueUI.ShowDialogue(npc.npcData, "Magic mi, olur valla döner.");
                 mtgQuest.omerBool = true;
-                dialogueUI.ShowDialogue(npc.npcData, "Magic mi, olur valla doner");
                 Debug.Log("Omer's quest interaction completed.");
                 return true;
             }
@@ -128,8 +236,8 @@ public class QuestTrackerScript : MonoBehaviour
         {
             if (!mtgQuest.eymenBool)
             {
+                dialogueUI.ShowDialogue(npc.npcData, "Ya çoluğunu çocuğunu, neyse magic okey");
                 mtgQuest.eymenBool = true;
-                dialogueUI.ShowDialogue(npc.npcData, "Colugunu cocugunu, magic okey");
                 Debug.Log("Eymen's quest interaction completed.");
                 return true;
             }
@@ -138,8 +246,8 @@ public class QuestTrackerScript : MonoBehaviour
         {
             if (!mtgQuest.sadealiBool)
             {
+                dialogueUI.ShowDialogue(npc.npcData, "Tamam abi siz oynuyosanız gelirim magic");
                 mtgQuest.sadealiBool = true;
-                dialogueUI.ShowDialogue(npc.npcData, "tamam abi siz oynuysaniz gelirim magic");
                 Debug.Log("Sadeali's quest interaction completed.");
                 return true;
             }
@@ -148,8 +256,8 @@ public class QuestTrackerScript : MonoBehaviour
         {
             if (!pushUpQuest.ugurBool)
             {
+                dialogueUI.ShowDialogue(npc.npcData, "Abi ne sınavı ya HAA ŞINAV MI ABİ BİZİM ŞINAV YARIŞMASI VARDI ALOOO");
                 pushUpQuest.ugurBool = true;
-                dialogueUI.ShowDialogue(npc.npcData, "Lan redbull mu bu SINAV YARISMASI YAPIYODUK HANI ALO");
                 Debug.Log("Ugur's quest interaction completed.");
                 return true;
             }
@@ -158,8 +266,8 @@ public class QuestTrackerScript : MonoBehaviour
         {
             if (!pushUpQuest.kaganBool)
             {
+                dialogueUI.ShowDialogue(npc.npcData, ":D Amınakoyim yaa, Tamam lanet olsun yapalım o şınav yarışmasını da");
                 pushUpQuest.kaganBool = true;
-                dialogueUI.ShowDialogue(npc.npcData, "Size bi koyarim bi de intermilan neyse katayla ugur da sinav");
                 Debug.Log("Kagan's quest interaction completed.");
                 return true;
             }
@@ -168,8 +276,8 @@ public class QuestTrackerScript : MonoBehaviour
         {
             if (!pushUpQuest.kataBool)
             {
+                dialogueUI.ShowDialogue(npc.npcData, "Ben diyetteyim abi bu şekerli *lıkır lıkır* ŞINAV YARIŞMASI LETS GOO");
                 pushUpQuest.kataBool = true;
-                dialogueUI.ShowDialogue(npc.npcData, "Ben icmiyim abi sekerli diyet *likir likir* Hadi sinav");
                 Debug.Log("Kata's push up quest interaction completed.");
                 return true;
             }
@@ -178,8 +286,8 @@ public class QuestTrackerScript : MonoBehaviour
         {
             if (!justDanceQuest.maliBool)
             {
+                dialogueUI.ShowDialogue(npc.npcData, "Abi dinlenmek bana fark etmez amınakoim Deniz başliyak hadi");
                 justDanceQuest.maliBool = true;
-                dialogueUI.ShowDialogue(npc.npcData, "O KULAKLIGI ALMAYA GELIYRUM DENIZ HAZIR OLSUN");
                 Debug.Log("Mali's quest interaction completed.");
                 return true;
             }
@@ -188,16 +296,74 @@ public class QuestTrackerScript : MonoBehaviour
         {
             if (!justDanceQuest.denizBool)
             {
+                dialogueUI.ShowDialogue(npc.npcData, "Free kulaklık Mali hazır olsun");
                 justDanceQuest.denizBool = true;
-                dialogueUI.ShowDialogue(npc.npcData, "ez win mali hazir olsun");
                 Debug.Log("Deniz's quest interaction completed.");
+                return true;
+            }
+        }
+        if (npc.npcData.name == "egehan" && hasBed)
+        {
+            if (!sleepQuest.egehanBool)
+            {
+                dialogueUI.ShowDialogue(npc.npcData, "Ya yatak nereye gitti alo");
+                sleepQuest.egehanBool = true;
+                Debug.Log("Egehan's quest interaction completed.");
+                return true;
+            }
+        }
+        if (npc.npcData.name == "bugra" && hasBed)
+        {
+            if (!sleepQuest.bugraBool)
+            {
+                dialogueUI.ShowDialogue(npc.npcData, "Yatağını nasıl kaybedebilirsin ki");
+                sleepQuest.bugraBool = true;
+                Debug.Log("Bugra's quest interaction completed.");
+                return true;
+            }
+        }
+        if (npc.npcData.name == "kagan" && hasMaliLaptop)
+        {
+            if (!wallpaperQuest.kaganBool)
+            {
+                dialogueUI.ShowDialogue(npc.npcData, "Toplan cabuk Malinin laptop açık :D");
+                wallpaperQuest.kaganBool = true;
+                Debug.Log("Kagan's wallpaper quest interaction completed.");
+                return true;
+            }
+        }
+        if (npc.npcData.name == "egea" && hasMaliLaptop)
+        {
+            if (!wallpaperQuest.egeArdaBool)
+            {
+                dialogueUI.ShowDialogue(npc.npcData, "Gerçek patron zenci işi type shit");
+                wallpaperQuest.egeArdaBool = true;
+                Debug.Log("Egea's wallpaper quest interaction completed.");
+                return true;
+            }
+        }
+        if (npc.npcData.name == "alren" && hasMaliLaptop)
+        {
+            if (!wallpaperQuest.alrenBool)
+            {
+                dialogueUI.ShowDialogue(npc.npcData, "Eşşek laptopu");
+                wallpaperQuest.alrenBool = true;
+                Debug.Log("Alren's wallpaper quest interaction completed.");
+                return true;
+            }
+        }
+        if (npc.npcData.name == "ege" && hasNoodle)
+        {
+            if (!noodleQuest.egeBool)
+            {
+                dialogueUI.ShowDialogue(npc.npcData, "AYOOOOOO NOODLE EDIT");
+                noodleQuest.egeBool = true;
+                Debug.Log("Ege's noodle quest interaction completed.");
                 return true;
             }
         }
         return false;
     }
-
-
 }
 
 public class Quest
@@ -205,6 +371,7 @@ public class Quest
     public string questDescription;
     public bool isActive = false;
     public bool isCompleted = false;
+    public string questKeyword = "";
 
     public void CompleteQuest()
     {
@@ -242,6 +409,7 @@ public class MTGQuest : Quest
             }
         }
         questDescription = "Magic desteli çanta buldum. Kata, Ömer, SadeAli ve Eymen magic oynamak isteyebilirler.";
+        questKeyword = "mtg";
     }
     
 }
@@ -278,6 +446,7 @@ public class PushUpQuest : Quest
         this.redbull = redbull;
         redbull.quest = this;
         questDescription = "Redbull buldum. Kata, Uğur ve Kağan'a yeterince enerji vermeye yetebilir.";
+        questKeyword = "pushup";
     }
 }
 
@@ -308,6 +477,7 @@ public class JustDanceQuest : Quest
         this.remote = remote;
         remote.quest = this; // Assign the quest to the remote item
         questDescription = "Nintendo kumandası buldum. Mali ve Deniz'in Just Dance finali yaklaşıyor.";
+        questKeyword = "justdance";
 
     }
 }
@@ -318,6 +488,7 @@ public class SleepQuest : Quest
     public List<string> questNpcsNames;
     public List<NpcComponent> questNpcs;
     public bool egehanBool = false;
+    public bool bugraBool = false;
     public SleepQuest(QuestItemComponent bed, List<string> questNpcsNames)
     {
         this.questNpcsNames = questNpcsNames;
@@ -337,7 +508,8 @@ public class SleepQuest : Quest
         }
         this.bed = bed;
         bed.quest = this; // Assign the quest to the bed item
-        questDescription = "Boşta son kalan yatağı kaptım. Egehan uykulu görünüyordu.";
+        questDescription = "Boşta son kalan yatağı kaptım. Egehan ve Buğra uykulu görünüyordu.";
+        questKeyword = "sleep";
     }
 }
 
@@ -363,10 +535,43 @@ public class WallpaperQuest : Quest
             else
             {
                 Debug.LogWarning($"NPC with name {npcName} not found in the scene.");
+                Debug.Log(GameManagerScript.Instance.allNpcs.Count + " NPCs found in the scene.");
+
             }
         }
         this.maliLaptop = maliLaptop;
         maliLaptop.quest = this; // Assign the quest to the wallpaper item
         questDescription = "Mali'nin laptopu açık kalmış. Kağan, Alren ve Ege Arda güzel bi sürpriz yapabilir.";
+        questKeyword = "wallpaper";
     }
+}
+
+public class NoodleQuest : Quest
+{
+    public QuestItemComponent noodle;
+    public List<string> questNpcsNames;
+    public List<NpcComponent> questNpcs;
+    public bool egeBool = false;
+    public NoodleQuest(QuestItemComponent noodle, List<string> questNpcsNames)
+    {
+        this.questNpcsNames = questNpcsNames;
+        questNpcs = new List<NpcComponent>();
+        foreach (string npcName in questNpcsNames)
+        {
+            NpcComponent npc = GameManagerScript.Instance.allNpcs.Find(n => n.GetComponent<NpcComponent>().npcName == npcName)?.GetComponent<NpcComponent>();
+            if (npc != null)
+            {
+                questNpcs.Add(npc);
+            }
+            else
+            {
+                Debug.LogWarning($"NPC with name {npcName} not found in the scene.");
+            }
+        }
+        this.noodle = noodle;
+        noodle.quest = this; 
+        questDescription = "Ege bu Noodle'a edit yapmak istiyor, hell yeah.";
+        questKeyword = "noodle";
+    }
+
 }

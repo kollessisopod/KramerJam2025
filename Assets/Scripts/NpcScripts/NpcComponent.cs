@@ -34,6 +34,7 @@ public class NpcComponent : MonoBehaviour
         else
         {
             onLastLine = true;
+            GameManagerScript.Instance.talkedNpcCount++;
         }
     }
     public void ShowAlertMark()
@@ -57,5 +58,17 @@ public class NpcComponent : MonoBehaviour
         {
             Debug.LogError("AlertMarkSpriteRenderer is not assigned in the inspector.");
         }
+    }
+
+    public void AddDialogue(string message)
+    {
+        if (npcData == null)
+        {
+            Debug.LogWarning("NpcData is not assigned for " + gameObject.name);
+            return;
+        }
+
+        npcData.lastLine = message;
+
     }
 }

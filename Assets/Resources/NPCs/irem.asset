@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68fce6bc75b33164fb6812f37a92e90d, type: 3}
+  m_Name: irem
+  m_EditorClassIdentifier: 
+  npcName: irem
+  npcSprite: {fileID: 21300000, guid: 36745712a1a445f49b9c53d544dba1c7, type: 3}
+  npcPortrait: {fileID: 21300000, guid: f884206590f4bde48837e7a5a401c2bb, type: 3}
+  dialogueLines:
+  - lines:
+    - Pankek
+    - Ama solistimiz yok
+    - "(belki vard\u0131r)"
+  - lines:
+    - "D\xFC\u015F\xFCnceni"
+    - "\xD6nemsiyorum"
+    - :)
+  - lines:
+    - Yaniiiii
+  - lines:
+    - "Solist aramak fl\xF6rtle\u015Fmek gibi"
+  lastLine: (ritim tutar)

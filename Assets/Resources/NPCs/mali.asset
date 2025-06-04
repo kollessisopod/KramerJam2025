@@ -17,8 +17,15 @@ MonoBehaviour:
   npcPortrait: {fileID: 21300000, guid: 75ee70f5d0d1f14418d0c89c2852d557, type: 3}
   dialogueLines:
   - lines:
-    - mali dialog
+    - "*ya alren bu g\xF6t kim ammm\u0131-*"
+    - "Aaa naber kanki ho\u015Fgeldin"
   - lines:
-    - Just dance cok iyi oyun
-    - valla
-  lastLine: vardi da unuttum
+    - ANNANNI AVRADINIII
+  - lines:
+    - "Te\u015Fhis : E\u015F\u015Feklik"
+    - AMMINNAAKKKEEEEE
+  - lines:
+    - "Nas\u0131 espri ama :D"
+    - "\u0130nce :D"
+    - "Ka\xE7\u0131rmay\u0131n bunlar\u0131 :D"
+  lastLine: Kankiiii

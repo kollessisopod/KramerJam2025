@@ -17,5 +17,16 @@ MonoBehaviour:
   npcPortrait: {fileID: 21300000, guid: 1200dd1ea34a6fb47b8929682ee530d8, type: 3}
   dialogueLines:
   - lines:
-    - film falan cok iyi
-  lastLine: bu ne
+    - "Film falan \xE7ok iyi"
+  - lines:
+    - Sikko japon oyunu
+  - lines:
+    - Tamam switch oyniycam
+    - Ya da neyse magic hadi
+    - "Hay \xE7olu\u011Funu \xE7ocu\u011Funu"
+  - lines:
+    - "Magicin yeni seti \xE7\u0131kana kadar"
+    - "B\xFCt\xFCn FFleri oynicam"
+    - FF ne mi
+    - Foo Fighters
+  lastLine: "FF6 \xE7ok iyi Baya iyi"

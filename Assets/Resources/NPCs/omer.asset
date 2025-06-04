@@ -17,9 +17,13 @@ MonoBehaviour:
   npcPortrait: {fileID: 21300000, guid: b59435214eb04f84e89fe315c21483f8, type: 3}
   dialogueLines:
   - lines:
-    - ben aslinda omer
-    - yeah
+    - "Turu al\u0131yorum."
   - lines:
-    - this is a
-    - toyota
-  lastLine: end of line
+    - "Ekspedi\u015F\u0131n \xE7ok iyi"
+    - Bak git oyna
+  - lines:
+    - "E\u015F\u015Fek herif ya"
+    - "Ba\u015Fka kim e\u015F\u015Fek biliyo musun"
+  - lines:
+    - "Tats\u0131z"
+  lastLine: "K\xF6t\xFC olmu\u015F"

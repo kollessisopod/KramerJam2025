@@ -17,6 +17,11 @@ public class PlayerInteraction : MonoBehaviour
     private bool flag = false;
     private bool isNpcCloser = false;
     private bool outflag = false;
+    public bool cutsceneIncoming = false;
+
+    public bool showCutscene;
+    bool cutsceneFlag = false; 
+    public string questKeyword;
 
     private void Start()
     {
@@ -31,6 +36,25 @@ public class PlayerInteraction : MonoBehaviour
         UpdateAlertMark();
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            if(GameManagerScript.Instance.notebookPanel.activeInHierarchy)
+            {
+                return;
+            }
+            if (showCutscene)
+            {
+                if (cutsceneFlag)
+                {
+                    dialogueUI.HideDialogue();
+                    cutsceneFlag = false;
+                    return;
+                } else
+                {
+                    CutsceneSelection(questKeyword);
+                    cutsceneFlag = true;
+                    return;
+                }
+            }
+            WinCheck();
             if (isNpcCloser)
             {
                 if (currentNpc != null)
@@ -65,6 +89,7 @@ public class PlayerInteraction : MonoBehaviour
                             dialogueUI.HideDialogue();
                             ResetDialogueState();
                         }
+
                         return;
                     }
 
@@ -94,6 +119,8 @@ public class PlayerInteraction : MonoBehaviour
                     currentItem.Interact();
                 }
             }
+
+
         }
     }
 
@@ -222,6 +249,54 @@ public class PlayerInteraction : MonoBehaviour
                     currentNpc.HideAlertMark();
                     isNpcCloser = false;
                 }
+            }
+        }
+    }
+
+    private void CutsceneSelection(string questKeyword)
+    {
+        var oguzhan = GameManagerScript.Instance.allNpcs.Find(npc => npc.GetComponent<NpcComponent>().npcData.npcName == "oguzhan");
+        var oguzhanData = oguzhan.GetComponent<NpcComponent>().npcData;
+        switch (questKeyword)
+        {
+            case "mtg":
+                dialogueUI.ShowDialogue(oguzhanData, "mtg comment");
+
+                break;
+            
+            case "pushup":
+
+                break;
+
+            case "justdance":
+
+                break;
+
+            case "noodle":
+                dialogueUI.ShowDialogue(oguzhanData, "noodle comment");
+                break;
+
+            case "sleep":
+
+                break;
+
+            case "wallpaper":
+
+                break;
+
+            default:
+                Debug.LogWarning("No cutscene available for quest keyword: " + questKeyword);
+                break;
+        }
+    }
+
+    private void WinCheck()
+    {
+        if(GameManagerScript.Instance.jammerCount == 79)
+        {
+            if(currentNpc != null && currentNpc.npcData.npcName == "irem")
+            {
+                GameManagerScript.Instance.FinishGame();
             }
         }
     }

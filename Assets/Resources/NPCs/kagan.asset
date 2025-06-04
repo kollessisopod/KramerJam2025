@@ -14,15 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcName: kagan
   npcSprite: {fileID: 21300000, guid: 09ffde61dc2cca14e8d685176fcfc010, type: 3}
-  npcPortrait: {fileID: 21300000, guid: 5830adc6e1f968240a3beb0406d7732d, type: 3}
+  npcPortrait: {fileID: 21300000, guid: b7c160bb81b3a994b9f2798f5a1be9c8, type: 3}
   dialogueLines:
   - lines:
-    - 1
-    - 2
-    - 3
+    - "(nah \xE7eker)"
+    - :D
+    - Naber abi
   - lines:
-    - 1
-    - 2
+    - "\u0130\u015F g\xFC\xE7 nas\u0131"
   - lines:
-    - abi yetmez mi
-  lastLine: rogulike
+    - Lakin,
+    - "M\xFCmk\xFCn mertebe."
+    - "Ya\u015Famayan yoktur."
+  - lines:
+    - "WoW abonel\u011Fim bitti ya"
+    - abi lanet olsun ya
+  lastLine: "(saniyede 100 kez nah \xE7eker)"

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68fce6bc75b33164fb6812f37a92e90d, type: 3}
+  m_Name: oguzhan
+  m_EditorClassIdentifier: 
+  npcName: oguzhan
+  npcSprite: {fileID: 21300000, guid: b88ed0840a8933c4e902a585d3a3f3fb, type: 3}
+  npcPortrait: {fileID: 21300000, guid: 060677b20d1315f4faa7df391df03fac, type: 3}
+  dialogueLines:
+  - lines:
+    - Abi
+    - "T*\u015F\u015Fak m\u0131 ge\xE7iyosunuz"
+  - lines:
+    - "Gerekli mailleri att\u0131n\u0131z m\u0131"
+  - lines:
+    - "Seni Jammer listesinde g\xF6remedim"
+    - Neyse
+  - lines:
+    - "Ben nap\u0131yorum burda ya"
+    - IO
+    - Ayol
+  lastLine: "Jam nas\u0131l ge\xE7iyor?"

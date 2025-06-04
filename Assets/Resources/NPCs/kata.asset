@@ -17,7 +17,15 @@ MonoBehaviour:
   npcPortrait: {fileID: 21300000, guid: efad05e21ce8c294bb6b299dd5bcadbe, type: 3}
   dialogueLines:
   - lines:
-    - ben aslinda kata
+    - "Farewell oynad\u0131n m\u0131 (Celeste)"
   - lines:
-    - goksel warcraft oynuyo
-  lastLine: isopods
+    - "Wavedash \u015F\xF6yle"
+    - "Yere \xE7apraz dash atarken tam yerde durdu\u011Fu\u0131n esnada"
+    - "z\u0131plaman gerekiyor ama"
+    - "erken atlarsan gidemiyosun ge\xE7 atlarsan (...)"
+  - lines:
+    - "Ben sana derin deniz devli\u011Fi sunumu yapm\u0131\u015F m\u0131yd\u0131m"
+  - lines:
+    - Disturbing the peaaceeee
+    - "Look into\u0131 my eeyeesss"
+  lastLine: Abi pokemon

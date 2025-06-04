@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManagerScript : MonoBehaviour
 {
@@ -10,17 +11,24 @@ public class GameManagerScript : MonoBehaviour
     public GameObject canvas;
     public GameObject hud;
     public GameObject panel;
+    public GameObject winPanel;
     public GameObject player;
     public GameObject questTrackerObject;
     public GameObject notebookPanel;
+    public GameObject cutscenePanel;
     public QuestTrackerScript questTracker;
+    public PostQuestEffectsScript postQuestEffects;
     public List<GameObject> allNpcs;
     public int npcCount => allNpcs.Count;
     public int talkedNpcCount = 0;
+    public int jammerCount = 80;
+    public bool wonState = false;
+    private CutsceneUI cutsceneUI;
 
     // Start is called before the first frame update
     private void Awake()
     {
+
         // Ensure only one instance of GameManagerScript exists
         if (Instance == null)
         {
@@ -35,6 +43,8 @@ public class GameManagerScript : MonoBehaviour
         canvas.SetActive(true);
         globalLight.SetActive(true);
         mainCamera.SetActive(true);
+
+        cutsceneUI = cutscenePanel.GetComponent<CutsceneUI>();
 
         player = GameObject.FindGameObjectWithTag("Player");
         if (player == null)
@@ -89,7 +99,7 @@ public class GameManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (panel.activeInHierarchy || notebookPanel.activeInHierarchy)
+        if (panel.activeInHierarchy || notebookPanel.activeInHierarchy || cutscenePanel.activeInHierarchy)
         {
             // Pause the game when the canvas is active
             Time.timeScale = 0f;
@@ -105,10 +115,14 @@ public class GameManagerScript : MonoBehaviour
             Application.Quit();
             Debug.Log("Game exited.");
         }
+        if (cutscenePanel.activeInHierarchy)
+        {
+            cutsceneUI.ShowCutscene(cutsceneUI.image, "Cutscene is active. Press Space to continue.");
+        }
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             // Toggle the notebook panel when Tab is pressed
-            if (notebookPanel != null && !panel.activeInHierarchy)
+            if (notebookPanel != null && !panel.activeInHierarchy && !cutscenePanel.activeInHierarchy)
             {
                 if(!notebookPanel.activeInHierarchy)
                 {
@@ -127,9 +141,20 @@ public class GameManagerScript : MonoBehaviour
             }
 
         }
-
     }
 
+    public void StartCutscene()
+    {
+        if (cutscenePanel != null)
+        {
+            cutscenePanel.SetActive(true);
+            Time.timeScale = 0f; // Pause the game during the cutscene
+        }
+        else
+        {
+            Debug.LogWarning("Cutscene panel is not assigned in the GameManagerScript.");
+        }
+    }
 
     public void AddTalkedNpc()
     {
@@ -140,5 +165,16 @@ public class GameManagerScript : MonoBehaviour
             Debug.Log("All NPCs have been talked to.");
             // You can add additional logic here, such as triggering an event or changing the game state.
         }
+    }
+    public void WinMeow()
+    {
+        wonState = true;
+        Debug.Log("You won the game!");
+        winPanel.SetActive(true);
+    }
+
+    public void FinishGame()
+    {
+        SceneManager.LoadScene("VictoryScene");
     }
 }

@@ -19,4 +19,13 @@ MonoBehaviour:
   - lines:
     - Kardesim
     - dogru dur aw
-  lastLine: noodle ye
+  - lines:
+    - "Allah a\u015Fk\u0131na hayats\u0131z olmay\u0131n"
+    - Sana helal olsun
+  - lines:
+    - "Biz \u015Fimdi nap\u0131caz"
+  - lines:
+    - "Do\u011Fum saatini biliyo musun"
+    - "Haritana bak\u0131cam gel"
+    - "Hay\u0131r lan y\u0131ld\u0131z haritana"
+  lastLine: "Noodle yeme zararl\u0131"

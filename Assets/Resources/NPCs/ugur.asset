@@ -17,5 +17,20 @@ MonoBehaviour:
   npcPortrait: {fileID: 21300000, guid: a946b1cf3b70260409d51b8bae053569, type: 3}
   dialogueLines:
   - lines:
-    - fallout
-  lastLine: asdasd
+    - Naber millet :D
+  - lines:
+    - "Abi kad\u0131k\xF6y geliyosunuz beni niye \xE7a\u011F\u0131rm\u0131yosunuz
+      ya"
+    - "O saatte i\u015Fim var da neyse"
+  - lines:
+    - "Ya sikicem kul\xFCb\xFCn de"
+    - Okulunu da
+  - lines:
+    - Hadi kaymaya
+    - "\u0130\xE7meye ya da"
+    - "Zeki adam oldu\u011Fum i\xE7in normal ya"
+  - lines:
+    - "Oyun geli\u015Ftirme "
+    - "Unity \xF6\u011Freniyorum"
+    - "Oyun geli\u015Ftirme kas\u0131cam"
+  lastLine: Abi fallout

@@ -17,14 +17,24 @@ MonoBehaviour:
   npcPortrait: {fileID: 21300000, guid: 9d8c856c8f26be94dad67a19fa8f0c63, type: 3}
   dialogueLines:
   - lines:
-    - 1
-    - 2
-    - 3
-    - 4
+    - Kankiii
+    - "Bak \u015Fimdi :D"
+    - "Anlat\u0131yorum"
+    - "\u015E\xF6yleli :D"
+    - "(bombo\u015F bi a\xE7\u0131klama)"
   - lines:
-    - 1
-    - 2
+    - Ben boktan anime izliyorum
+    - Abi erkek olan anime izlenir mi ya
   - lines:
-    - haha
-    - meow
-  lastLine: balatro
+    - GTA Vice City
+  - lines:
+    - 40 heat Hades var
+    - "Hades 2de y\xFCz saatim var"
+    - Severim
+    - "\u015E\xF6yleli"
+  - lines:
+    - Talha gel AnimeMusicQuiz
+  - lines:
+    - "Sen Rockstar Gamesin yapt\u0131\u011F\u0131 masa tenisi oyununu oynad\u0131n
+      m\u0131"
+  lastLine: Yaa :D

@@ -17,5 +17,17 @@ MonoBehaviour:
   npcPortrait: {fileID: 21300000, guid: acb38106c5be8fc438d81750e4abd5fd, type: 3}
   dialogueLines:
   - lines:
-    - 'ege '
-  lastLine: mege
+    - Buyrunuz efenim
+  - lines:
+    - Overwatch gelen
+    - R6 ben gelemem
+    - "Overwatch\u0131mt\u0131rak"
+  - lines:
+    - "Last of us'\u0131n hikayesi sence de \xE7ok cesur de\u011Fil mi"
+  - lines:
+    - Sackboy my beloved
+    - "\xC7ok iyi sackboy"
+    - Bu arada
+    - ...
+    - "Ya neyse bo\u015Fver"
+  lastLine: Caniko

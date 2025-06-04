@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68fce6bc75b33164fb6812f37a92e90d, type: 3}
+  m_Name: talha
+  m_EditorClassIdentifier: 
+  npcName: talha
+  npcSprite: {fileID: 21300000, guid: 246afbf23eca884408505f26ad578a24, type: 3}
+  npcPortrait: {fileID: 21300000, guid: a11abbd89644bf647b98196a346f9aef, type: 3}
+  dialogueLines:
+  - lines:
+    - "Abi kesinlikle hakl\u0131s\u0131n"
+  - lines:
+    - "Sa\u011F ol senin g\xF6mle\u011Finde g\xFCzelmi\u015F"
+  - lines:
+    - OOoooooo
+    - Neleerrrrrr
+  - lines:
+    - "Alren AnimeMusicQuiz var m\u0131"
+    - "(Kimsenin izlemedi\u011Fi \u015F\xF6velye k\u0131zl\u0131 anime)"
+  lastLine: "Gangplank salarsan\u0131z oynar\u0131m"

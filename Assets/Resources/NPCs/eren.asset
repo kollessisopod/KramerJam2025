@@ -17,9 +17,15 @@ MonoBehaviour:
   npcPortrait: {fileID: 21300000, guid: c6dabc179db8ff940b2d897dd9d8e882, type: 3}
   dialogueLines:
   - lines:
-    - abi
-    - brotato
-    - cok iyi oyun
+    - Abi
+    - Brotato
+    - "\xC7ok iyi oyun"
   - lines:
-    - redbull kaldi mi
-  lastLine: lutfen anneme soyleme
+    - "Redbull kald\u0131 m\u0131"
+    - "L\xFCtfen anneme s\xF6yleme"
+  - lines:
+    - Ortalamam
+    - "Boyumdan k\u0131sa"
+  - lines:
+    - Abi ya
+  lastLine: "Redbull kald\u0131 m\u0131"

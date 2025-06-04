@@ -17,7 +17,21 @@ MonoBehaviour:
   npcPortrait: {fileID: 21300000, guid: 1e6a429fb231f5c42a12e189674ecf3d, type: 3}
   dialogueLines:
   - lines:
-    - ben cok
-    - warcraft severim
-    - pardon world of warcrart
-  lastLine: kocaeline gittin mi
+    - "Disco Elysium oynad\u0131n m\u0131"
+    - Warcraft severim
+    - Pardon world of warcraftr
+  - lines:
+    - "Adam\u0131 kim \xF6ld\xFCrd\xFC?"
+    - "Kom\xFCnizm"
+    - "\u0130\u015Fini ne bitirdi?"
+    - "A\u015Fk."
+  - lines:
+    - "Hani baz\u0131 oyunlar onuyo mahmut"
+    - Bu kadar iyi olmuyo
+  - lines:
+    - Kocaeline gittin mi
+    - ...
+    - "Allah\u0131n Sakaryal\u0131s\u0131"
+  - lines:
+    - "Ben bu ak\u015Fam eve mi d\xF6nsem"
+  lastLine: "Eve d\xF6n\xFCyorum"

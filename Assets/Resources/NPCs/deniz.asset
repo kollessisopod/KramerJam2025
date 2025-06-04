@@ -17,7 +17,16 @@ MonoBehaviour:
   npcPortrait: {fileID: 21300000, guid: 25f6eb6ffb5b52942b8cd8c8324e888a, type: 3}
   dialogueLines:
   - lines:
-    - bendeniz
-    - deniz
-  - lines: []
-  lastLine: taylor swiftr
+    - Bendeniz
+    - Deniz
+  - lines:
+    - Poz ver
+    - "Foto\u011Fraf\u0131n\u0131 \xE7ekiyom"
+  - lines:
+    - OKULA
+    - "4 VESA\u0130TLE GEL\u0130YORUM"
+  - lines:
+    - Ya sen beni sevmiyo musun
+    - "Halbuki ben seni \xE7ok seviyorumm"
+    - "Sar\u0131lal\u0131m m\u0131"
+  lastLine: Taylor Swift

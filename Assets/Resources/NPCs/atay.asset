@@ -17,5 +17,11 @@ MonoBehaviour:
   npcPortrait: {fileID: 21300000, guid: 9f8d395e3a2696f4b83f6123de76716c, type: 3}
   dialogueLines:
   - lines:
-    - ben nasi biraya geldim
-  lastLine: yo
+    - "day\u0131"
+    - "ben buraya nas\u0131 geldim"
+  - lines:
+    - Gel sana
+    - 'gel '
+    - "ceketimin  i\xE7ini g\xF6stereyim"
+    - gelsene
+  lastLine: raadda kal

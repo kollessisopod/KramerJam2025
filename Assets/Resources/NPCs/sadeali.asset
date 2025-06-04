@@ -17,7 +17,19 @@ MonoBehaviour:
   npcPortrait: {fileID: 21300000, guid: ebbf4b8e3e1d1ae4d8567a97530b172f, type: 3}
   dialogueLines:
   - lines:
-    - ben sadeali
+    - Selamlar efenim
+    - Ben ali
+    - Sade ali
   - lines:
-    - selamlar
-  lastLine: evet
+    - "Bak abi \u015Fimdi"
+    - "(oturu\u015F d\xFCzeltir)"
+    - :D
+    - "III\u0131\u0131\u0131\u0131\u0131"
+    - "Erikleri ald\u0131\u011F\u0131m yer..."
+  - lines:
+    - C
+    - "III\u0131\u0131\u0131"
+    - "\u015Eundan \xF6t\xFCr\xFC daha iyi"
+    - "II\u0131"
+    - "C++ asl\u0131nda..."
+  lastLine: "Hadi gen\xE7lik"
