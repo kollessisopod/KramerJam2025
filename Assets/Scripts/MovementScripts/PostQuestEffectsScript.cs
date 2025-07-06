@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.XR;
 
 public class PostQuestEffectsScript : MonoBehaviour
 {
     public List<NpcComponent> allNpcs = new();
+    public GameObject thatOneSpesificTable;
+    public GameObject laptop;
+    public GameObject noodle;
 
 
     // Start is called before the first frame update
@@ -22,6 +26,7 @@ public class PostQuestEffectsScript : MonoBehaviour
             Debug.LogWarning("Quest is null in ProcessPostQuest");
             return;
         }
+
 
         switch (quest.questKeyword)
         {
@@ -40,6 +45,8 @@ public class PostQuestEffectsScript : MonoBehaviour
                 omer.AddDialogue("Burdan sonsuz response var mı");
                 eymen.AddDialogue("Tamam abi çoluğuna çocuğuna eldrazi indireyim");
                 sadeali.AddDialogue("Bi saniye");
+
+                thatOneSpesificTable.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Items/Table with cardes");
                 break;
 
             case "justdance":
@@ -61,14 +68,23 @@ public class PostQuestEffectsScript : MonoBehaviour
 
             case "noodle":
                 var ege = allNpcs.Find(npc => npc.npcName == "ege");
+                var dogukan = allNpcs.Find(npc => npc.npcName == "dogukan");
+                
+                SetPositionWithNoodleOffset(ege.transform, 2.029f, -3.601f);
+                SetPositionWithNoodleOffset(dogukan.transform, 3.263f, -3.780f);
+                
+                dogukan.AddDialogue("Never gonna let you down");
                 ege.AddDialogue("Never gonna give you up");
+
+                noodle.transform.position = new Vector3(2.339000f, -3.730000f, noodle.transform.position.z);
+
+
                 Debug.Log("Processing post quest effects for noodle quest");
                 break;
 
             case "sleep":
                 var bugra = allNpcs.Find(npc => npc.npcName == "bugra");
                 var egehan = allNpcs.Find(npc => npc.npcName == "egehan");
-
 
                 SetPositionWithSleep(bugra.transform, -2.89f, -5.65f);
                 bugra.transform.rotation = Quaternion.Euler(0, 0, 270);
@@ -80,6 +96,34 @@ public class PostQuestEffectsScript : MonoBehaviour
 
                 break;
 
+            case "pushup":
+
+                var oguzhan = allNpcs.Find(npc => npc.npcName == "oguzhan");
+                var ugur = allNpcs.Find(npc => npc.npcName == "ugur");
+                var kagan = allNpcs.Find(npc => npc.npcName == "kagan");
+
+                SetPositionWithPushUpOffset(oguzhan.transform, 1.804f, -0.41f);
+                SetPositionWithPushUpOffset(ugur.transform, -0.113f, -0.381f);
+                SetPositionWithPushUpOffset(kagan.transform, 1.18f, -0.06f);
+
+                kagan.transform.rotation = Quaternion.Euler(0, 0, 90);
+                oguzhan.transform.rotation = Quaternion.Euler(0, 0, 90);
+                ugur.transform.rotation = Quaternion.Euler(0, 0, 90);
+                ugur.transform.localScale = new Vector3(1, -1, 1);
+
+                oguzhan.AddDialogue("BASS HOCA BAAASSS");
+                ugur.AddDialogue("Fallout, Fallout 2, Fallout 3, Fallout 4, Fallout 76... ");
+                kagan.AddDialogue("Hggf... HHggfff... ");
+
+                break;
+
+            case "wallpaper":
+
+                laptop.transform.position = new Vector3(0.012000f, 1.404000f, laptop.transform.position.z);
+
+
+                break;
+
             default:
                 break;
         }
@@ -87,7 +131,6 @@ public class PostQuestEffectsScript : MonoBehaviour
     }
 
 
-    // More concise approach using a helper method
     private void SetPositionWithMtgOffset(Transform transform, float x, float y)
     {
         /*-0.13f
@@ -111,4 +154,29 @@ public class PostQuestEffectsScript : MonoBehaviour
         var pos = transform.position;
         transform.position = new Vector3(x + xOffset , y + yOffset, pos.z);
     }
+    private void SetPositionWithNoodleOffset(Transform transform, float x, float y)
+    {
+        var xOffset = 2.029f - 2.36686f;
+        var yOffset = -3.601f - -3.163301f;
+        var pos = transform.position;
+        transform.position = new Vector3(x + xOffset, y + yOffset, pos.z);
+    }
+    private void SetPositionWithPushUpOffset(Transform transform, float x, float y)
+    {
+        var xOffset = 1.804f -2.14186f;
+        var yOffset = -0.41f - 0.02769965f;
+        
+        var pos = transform.position;
+        transform.position = new Vector3(x + xOffset, y + yOffset, pos.z);
+
+    }
+
+    private void RelocateItemNpc()
+    {
+
+
+    }
+
+
+
 }

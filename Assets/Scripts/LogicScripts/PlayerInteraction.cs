@@ -17,10 +17,7 @@ public class PlayerInteraction : MonoBehaviour
     private bool flag = false;
     private bool isNpcCloser = false;
     private bool outflag = false;
-    public bool cutsceneIncoming = false;
 
-    public bool showCutscene;
-    bool cutsceneFlag = false; 
     public string questKeyword;
 
     private void Start()
@@ -40,20 +37,6 @@ public class PlayerInteraction : MonoBehaviour
             {
                 return;
             }
-            if (showCutscene)
-            {
-                if (cutsceneFlag)
-                {
-                    dialogueUI.HideDialogue();
-                    cutsceneFlag = false;
-                    return;
-                } else
-                {
-                    CutsceneSelection(questKeyword);
-                    cutsceneFlag = true;
-                    return;
-                }
-            }
             WinCheck();
             if (isNpcCloser)
             {
@@ -61,7 +44,7 @@ public class PlayerInteraction : MonoBehaviour
                 {
                     var npcData = currentNpc.npcData;
 
-                    if (npcData.dialogueLines == null || npcData.dialogueLines.Count == 0)
+                    if ((npcData.dialogueLines == null || npcData.dialogueLines.Count == 0) && !currentNpc.onLastLine)
                         return;
 
                     if(questTracker.NpcQuestInteraction(currentNpc, dialogueUI))
@@ -81,7 +64,14 @@ public class PlayerInteraction : MonoBehaviour
                     {
                         if (!flag)
                         {
-                            dialogueUI.ShowDialogue(npcData, npcData.lastLine);
+                            if(currentNpc.name != "noodle")
+                            {
+                                dialogueUI.ShowDialogue(npcData, npcData.lastLine);
+                            }
+                            else
+                            {
+                                dialogueUI.ShowVideoDialogue(npcData, npcData.lastLine);
+                            }
                             flag = true;
                         }
                         else
@@ -126,7 +116,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Npc"))
+        if (other.CompareTag("Npc") || other.CompareTag("ItemNpc"))
         {
             var npcComponent = other.GetComponent<NpcComponent>();
             if (npcComponent != null)
@@ -155,7 +145,7 @@ public class PlayerInteraction : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Npc"))
+        if (other.CompareTag("Npc") || other.CompareTag("ItemNpc"))
         {
             NpcComponent npc = other.GetComponent<NpcComponent>();
             collidingNpcs.Remove(npc);
@@ -250,43 +240,6 @@ public class PlayerInteraction : MonoBehaviour
                     isNpcCloser = false;
                 }
             }
-        }
-    }
-
-    private void CutsceneSelection(string questKeyword)
-    {
-        var oguzhan = GameManagerScript.Instance.allNpcs.Find(npc => npc.GetComponent<NpcComponent>().npcData.npcName == "oguzhan");
-        var oguzhanData = oguzhan.GetComponent<NpcComponent>().npcData;
-        switch (questKeyword)
-        {
-            case "mtg":
-                dialogueUI.ShowDialogue(oguzhanData, "mtg comment");
-
-                break;
-            
-            case "pushup":
-
-                break;
-
-            case "justdance":
-
-                break;
-
-            case "noodle":
-                dialogueUI.ShowDialogue(oguzhanData, "noodle comment");
-                break;
-
-            case "sleep":
-
-                break;
-
-            case "wallpaper":
-
-                break;
-
-            default:
-                Debug.LogWarning("No cutscene available for quest keyword: " + questKeyword);
-                break;
         }
     }
 

@@ -16,6 +16,7 @@ public class GameManagerScript : MonoBehaviour
     public GameObject questTrackerObject;
     public GameObject notebookPanel;
     public GameObject cutscenePanel;
+    public GameObject NpcPrefab;
     public QuestTrackerScript questTracker;
     public PostQuestEffectsScript postQuestEffects;
     public List<GameObject> allNpcs;
@@ -25,7 +26,6 @@ public class GameManagerScript : MonoBehaviour
     public bool wonState = false;
     private CutsceneUI cutsceneUI;
 
-    // Start is called before the first frame update
     private void Awake()
     {
 
@@ -91,6 +91,7 @@ public class GameManagerScript : MonoBehaviour
         questTracker = questTrackerObject.GetComponent<QuestTrackerScript>();
     }
 
+    // Start is called before the first frame update
     void Start()
     {
 
@@ -107,13 +108,6 @@ public class GameManagerScript : MonoBehaviour
         else
         {
             Time.timeScale = 1f;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            // Exit the game when Escape is pressed
-            Application.Quit();
-            Debug.Log("Game exited.");
         }
         if (cutscenePanel.activeInHierarchy)
         {
@@ -177,4 +171,6 @@ public class GameManagerScript : MonoBehaviour
     {
         SceneManager.LoadScene("VictoryScene");
     }
+
+
 }

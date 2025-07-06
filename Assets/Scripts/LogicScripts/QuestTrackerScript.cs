@@ -29,7 +29,7 @@ public class QuestTrackerScript : MonoBehaviour
     {
         //Singleton
         mtgQuest = new MTGQuest(mtgBag, new List<string> { "kata", "omer", "eymen", "sadeali" });
-        pushUpQuest = new PushUpQuest(redbull, new List<string> { "ugur", "kagan", "kata" });
+        pushUpQuest = new PushUpQuest(redbull, new List<string> { "ugur", "kagan", "oguzhan" });
         justDanceQuest = new JustDanceQuest(remote, new List<string> { "mali", "deniz" });
         sleepQuest = new SleepQuest(bed, new List<string> { "egehan", "bugra" });
         wallpaperQuest = new WallpaperQuest(maliLaptop, new List<string> { "kagan", "egea", "alren" });
@@ -74,11 +74,13 @@ public class QuestTrackerScript : MonoBehaviour
         }
         else if (!pushUpQuest.isCompleted)
         {
-            if (pushUpQuest.kataBool && pushUpQuest.ugurBool && pushUpQuest.kaganBool)
+            if (pushUpQuest.oguzhanBool && pushUpQuest.ugurBool && pushUpQuest.kaganBool)
             {
                 pushUpQuest.CompleteQuest();
                 Debug.Log("Push Up Quest completed: " + pushUpQuest.questDescription);
                 GameManagerScript.Instance.player.GetComponent<PlayerInteraction>().Items.Remove(redbull);
+
+                postQuestEffects.ProcessPostQuest(pushUpQuest);
             }
         }
 
@@ -160,9 +162,7 @@ public class QuestTrackerScript : MonoBehaviour
                 Debug.Log("Noodle Quest completed: " + noodleQuest.questDescription);
                 GameManagerScript.Instance.player.GetComponent<PlayerInteraction>().Items.Remove(noodle);
                 postQuestEffects.ProcessPostQuest(noodleQuest);
-                playerInteraction.cutsceneIncoming = true;
                 playerInteraction.questKeyword = "noodle";
-
 
             }
         }
@@ -216,7 +216,7 @@ public class QuestTrackerScript : MonoBehaviour
             if (!mtgQuest.kataBool)
             {
                 Debug.Log($"{npc.npcData.name}");
-                dialogueUI.ShowDialogue(npc.npcData, "TOPLA ÖMERİ SADEALİYİ EYMENİ MAGIC ATIYOZ");
+                dialogueUI.ShowDialogue(npc.npcData, "Çantam sende ne arıyo, neyse magic'e oynarız sen çağır diğerlerini");
                 mtgQuest.kataBool = true;
                 Debug.Log("Kata's quest interaction completed.");
                 return true;
@@ -226,7 +226,7 @@ public class QuestTrackerScript : MonoBehaviour
         {
             if (!mtgQuest.omerBool)
             {
-                dialogueUI.ShowDialogue(npc.npcData, "Magic mi, olur valla döner.");
+                dialogueUI.ShowDialogue(npc.npcData, "Magic mi, burada mı, şimdi mi? Olur valla döner.");
                 mtgQuest.omerBool = true;
                 Debug.Log("Omer's quest interaction completed.");
                 return true;
@@ -236,7 +236,7 @@ public class QuestTrackerScript : MonoBehaviour
         {
             if (!mtgQuest.eymenBool)
             {
-                dialogueUI.ShowDialogue(npc.npcData, "Ya çoluğunu çocuğunu, neyse magic okey");
+                dialogueUI.ShowDialogue(npc.npcData, "Ya çoluğunu çocuğunu, neyse okey oynarım");
                 mtgQuest.eymenBool = true;
                 Debug.Log("Eymen's quest interaction completed.");
                 return true;
@@ -246,7 +246,7 @@ public class QuestTrackerScript : MonoBehaviour
         {
             if (!mtgQuest.sadealiBool)
             {
-                dialogueUI.ShowDialogue(npc.npcData, "Tamam abi siz oynuyosanız gelirim magic");
+                dialogueUI.ShowDialogue(npc.npcData, "Tamam abi diğerleri oynuyosa gelirim");
                 mtgQuest.sadealiBool = true;
                 Debug.Log("Sadeali's quest interaction completed.");
                 return true;
@@ -256,7 +256,7 @@ public class QuestTrackerScript : MonoBehaviour
         {
             if (!pushUpQuest.ugurBool)
             {
-                dialogueUI.ShowDialogue(npc.npcData, "Abi ne sınavı ya HAA ŞINAV MI ABİ BİZİM ŞINAV YARIŞMASI VARDI ALOOO");
+                dialogueUI.ShowDialogue(npc.npcData, "Ne sınavı ne diyo-- Haa şınav, BİZİM ŞINAV YARIŞMASINA NOLDU ALO HADİ");
                 pushUpQuest.ugurBool = true;
                 Debug.Log("Ugur's quest interaction completed.");
                 return true;
@@ -266,19 +266,19 @@ public class QuestTrackerScript : MonoBehaviour
         {
             if (!pushUpQuest.kaganBool)
             {
-                dialogueUI.ShowDialogue(npc.npcData, ":D Amınakoyim yaa, Tamam lanet olsun yapalım o şınav yarışmasını da");
+                dialogueUI.ShowDialogue(npc.npcData, ":D Tamam lanet olsun yapalım o şınav yarışmasını da");
                 pushUpQuest.kaganBool = true;
                 Debug.Log("Kagan's quest interaction completed.");
                 return true;
             }
         }
-        if (npc.npcData.name == "kata" && hasRedbull)
+        if (npc.npcData.name == "oguzhan" && hasRedbull)
         {
-            if (!pushUpQuest.kataBool)
+            if (!pushUpQuest.oguzhanBool)
             {
-                dialogueUI.ShowDialogue(npc.npcData, "Ben diyetteyim abi bu şekerli *lıkır lıkır* ŞINAV YARIŞMASI LETS GOO");
-                pushUpQuest.kataBool = true;
-                Debug.Log("Kata's push up quest interaction completed.");
+                dialogueUI.ShowDialogue(npc.npcData, "Ya sen redbullu sal şınav gel hadi");
+                pushUpQuest.oguzhanBool = true;
+                Debug.Log("Oguzhan's push up quest interaction completed.");
                 return true;
             }
         }
@@ -286,7 +286,7 @@ public class QuestTrackerScript : MonoBehaviour
         {
             if (!justDanceQuest.maliBool)
             {
-                dialogueUI.ShowDialogue(npc.npcData, "Abi dinlenmek bana fark etmez amınakoim Deniz başliyak hadi");
+                dialogueUI.ShowDialogue(npc.npcData, "Abi dinlenmek bana fark etmez la çağır Denizi başliyak hadi");
                 justDanceQuest.maliBool = true;
                 Debug.Log("Mali's quest interaction completed.");
                 return true;
@@ -296,7 +296,7 @@ public class QuestTrackerScript : MonoBehaviour
         {
             if (!justDanceQuest.denizBool)
             {
-                dialogueUI.ShowDialogue(npc.npcData, "Free kulaklık Mali hazır olsun");
+                dialogueUI.ShowDialogue(npc.npcData, "Free kulaklık Mali'yi yok etmeye geliyom");
                 justDanceQuest.denizBool = true;
                 Debug.Log("Deniz's quest interaction completed.");
                 return true;
@@ -326,7 +326,7 @@ public class QuestTrackerScript : MonoBehaviour
         {
             if (!wallpaperQuest.kaganBool)
             {
-                dialogueUI.ShowDialogue(npc.npcData, "Toplan cabuk Malinin laptop açık :D");
+                dialogueUI.ShowDialogue(npc.npcData, "Toplan çabuk Malinin laptop açık :D");
                 wallpaperQuest.kaganBool = true;
                 Debug.Log("Kagan's wallpaper quest interaction completed.");
                 return true;
@@ -422,7 +422,7 @@ public class PushUpQuest : Quest
 
     public bool ugurBool = false;
     public bool kaganBool = false;
-    public bool kataBool = false;
+    public bool oguzhanBool = false;
 
     //constructor
     public PushUpQuest(QuestItemComponent redbull, List<string> questNpcsNames)
@@ -445,7 +445,7 @@ public class PushUpQuest : Quest
 
         this.redbull = redbull;
         redbull.quest = this;
-        questDescription = "Redbull buldum. Kata, Uğur ve Kağan'a yeterince enerji vermeye yetebilir.";
+        questDescription = "Redbull buldum. Oğuzhan, Uğur ve Kağan'a şınav yarışması için iyi olabilir.";
         questKeyword = "pushup";
     }
 }
@@ -573,5 +573,4 @@ public class NoodleQuest : Quest
         questDescription = "Ege bu Noodle'a edit yapmak istiyor, hell yeah.";
         questKeyword = "noodle";
     }
-
 }

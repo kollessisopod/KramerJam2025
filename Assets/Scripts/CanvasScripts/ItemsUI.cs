@@ -11,9 +11,24 @@ public class ItemsUI : MonoBehaviour
     public List<GameObject> currentIcons = new();
     public List<QuestItemComponent> questItems = new();
 
+    public Slider volumeSlider;
+    public Button muteButton;
+
     private void Start()
     {
         questItems = GameManagerScript.Instance.player.GetComponent<PlayerInteraction>().Items;
+
+        // Initialize volume controls
+        if (volumeSlider != null)
+        {
+            volumeSlider.value = AudioManager.Instance.GetVolume();
+            volumeSlider.onValueChanged.AddListener(OnVolumeChanged);
+        }
+
+        if (muteButton != null)
+        {
+            muteButton.onClick.AddListener(ToggleMute);
+        }
     }
 
     private void Update()
@@ -62,5 +77,18 @@ public class ItemsUI : MonoBehaviour
             currentIcons.Add(iconGO);
         }
     }
+
+
+    private void OnVolumeChanged(float value)
+    {
+        AudioManager.Instance.SetVolume(value);
+    }
+
+    private void ToggleMute()
+    {
+        AudioManager.Instance.ToggleMute();
+        volumeSlider.value = AudioManager.Instance.GetVolume();
+    }
+
 
 }

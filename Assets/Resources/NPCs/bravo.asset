@@ -17,8 +17,8 @@ MonoBehaviour:
   npcPortrait: {fileID: 21300000, guid: 0e0980e49c08a5f438fbbf5bf4d9452f, type: 3}
   dialogueLines:
   - lines:
-    - Abi
     - "\xC7ok iyi bi oyun fikrim var"
+    - balls
   - lines:
     - Ya
     - Ya
